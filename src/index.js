@@ -1,13 +1,39 @@
 const cep = document.getElementById("cep");
 
-cep.addEventListener("keyup", formatarCep);
+const pesquisarCep = async() => {
+    let cep = document.getElementById("cep").value;
+    const url = `http://viacep.com.br/ws/${cep}/json/`;
+    //const promessa =await fetch(url).then(response => response.json).then();
+    const promessa = await fetch(url);
+    const dados = await promessa.json();
+    if(dados.hasOwnProperty('erro')){
+        alert("CEP nao existe! Preencha Novamente.");
+    }else{
+        preencherDados(dados);
+    }
+}
+
+const preencherDados = (dados) => {
+    let logradouro = document.getElementById("logradouro").value = dados.logradouro;
+    let bairro = document.getElementById("bairro").value = dados.bairro;
+    let cidade = document.getElementById("cidade").value = dados.localidade;
+    let estado = document.getElementById("estado").value = dados.uf;
+    
+}
 
 function formatarCep(e){
 
-var v= e.target.value.replace(/\D/g,"")                
+    var v= e.target.value.replace(/\D/g,"")                
+    
+    v = v.replace(/^(\d{5})(\d{3})/,"$1-$2") 
+    
+    e.target.value = v;
+    
+    }
 
-v = v.replace(/^(\d{5})(\d{3})/,"$1-$2") 
+cep.addEventListener("focusout",pesquisarCep);
+cep.addEventListener("keyup", formatarCep);
 
-e.target.value = v;
 
-}
+
+//17057360
