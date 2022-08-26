@@ -1,11 +1,11 @@
-const cep = document.getElementById("cep");
+let cep = document.getElementById("cep");
 
 const pesquisarCep = async() => {
     let cep = document.getElementById("cep").value;
-    const url = `http://viacep.com.br/ws/${cep}/json/`;
+    let url = `http://viacep.com.br/ws/${cep}/json/`;
     //const promessa =await fetch(url).then(response => response.json).then();
-    const promessa = await fetch(url);
-    const dados = await promessa.json();
+    let promessa = await fetch(url);
+    let dados = await promessa.json();
     if(dados.hasOwnProperty('erro')){
         alert("CEP nao existe! Preencha Novamente.");
     }else{
