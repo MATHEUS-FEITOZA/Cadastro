@@ -1,5 +1,5 @@
 let cep = document.getElementById("cep");
-let btnEnviar = document.getElementById("btnEnviar");
+
 
 const pesquisarCep = async () => {
     let cep = document.getElementById("cep").value;
@@ -8,11 +8,18 @@ const pesquisarCep = async () => {
     let promessa = await fetch(url);
     let dados = await promessa.json();
     if (dados.hasOwnProperty('erro')) {
+
         Swal.fire({
             icon: 'error',
             title: 'CPF não existe, preencha novamente!',
             text: '',
         });
+        let logradouro = document.getElementById("logradouro").value = "";
+        let bairro = document.getElementById("bairro").value = "";
+        let cidade = document.getElementById("cidade").value = "";
+        let estado = document.getElementById("estado").value = "";
+
+
     } else {
         preencherDados(dados);
     }
