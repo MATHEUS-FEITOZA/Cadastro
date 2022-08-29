@@ -11,7 +11,7 @@ const pesquisarCep = async () => {
 
         Swal.fire({
             icon: 'error',
-            title: 'CPF não existe, preencha novamente!',
+            title: 'CEP não existe, preencha novamente!',
             text: '',
         });
         let logradouro = document.getElementById("logradouro").value = "";
